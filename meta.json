@@ -4,23 +4,25 @@
 {
     //Required. Inputs the module expects.
     "inputs": [
-        //e.g.
-        /*
         {
-            "id": "from",
-            "title":"From"
+            "id": "name",
+            "title":"Spreadsheet Name"
         }
-        */
     ],
     //Required. Outputs the module emits.
     "outputs": [
-      //e.g.
-      /*
         {
-            "id": "from",
-            "title":"From"
+            "id": "id",
+            "title":"ID"
+        },
+        {
+            "id": "title",
+            "title":"Spreadsheet Name"
+        },
+        {
+            "id": "defaultOpenWithLink",
+            "title":"URL"
         }
-      */
     ],
-    "title": "Google Sheets Create Sheet" /* Required.A display name for the module */
+    "title": "Google Sheets Create Spreadsheet" /* Required.A display name for the module */
 }
