@@ -10,7 +10,7 @@ module.exports = {
 
         if(!step.input('name').first())
             return 'A [name] input variable is required for this module';
-        
+
         return false;
     },
 
