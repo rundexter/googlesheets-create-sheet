@@ -24,6 +24,18 @@
             "title":"URL"
         }
     ],
+    "providers": [{
+        "name": "google",
+        "scopes": [
+            "https://spreadsheets.google.com/feeds/",
+            "https://www.googleapis.com/auth/drive",
+            "https://www.googleapis.com/auth/drive.file",
+            "https://www.googleapis.com/auth/drive.appdata",
+            "https://www.googleapis.com/auth/drive.metadata",
+            "https://www.googleapis.com/auth/drive.scripts",
+            "https://www.googleapis.com/auth/drive.apps.readonly"
+        ]
+    }],
     "icon": "google",
     "title": "Google Sheets Create Spreadsheet" /* Required.A display name for the module */
 }

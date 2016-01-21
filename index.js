@@ -1,6 +1,6 @@
 var _ = require('lodash'),
     google = require('googleapis'),
-    OAuth2 = google.auth.OAuth2;
+    service = google.drive('v2');
 
 var pickData = ['id', 'title', 'defaultOpenWithLink'];
 var mimeType = 'application/vnd.google-apps.spreadsheet';
@@ -8,15 +8,10 @@ var mimeType = 'application/vnd.google-apps.spreadsheet';
 module.exports = {
     checkAuthOptions: function (step, dexter) {
 
-        if(!step.input('name').first()) {
-
-            this.fail('A [name] input variable is required for this module');
-        }
-
-        if(!dexter.environment('google_access_token')) {
-
-            this.fail('A google_access_token environment variable is required for this module');
-        }
+        if(!step.input('name').first())
+            return 'A [name] input variable is required for this module';
+        
+        return false;
     },
 
     /**
@@ -26,15 +21,19 @@ module.exports = {
      * @param {AppData} dexter Container for all data used in this workflow.
      */
     run: function(step, dexter) {
+        var OAuth2 = google.auth.OAuth2,
+            oauth2Client = new OAuth2(),
+            credentials = dexter.provider('google').credentials(),
+            error = this.checkAuthOptions(step, dexter);
 
-        this.checkAuthOptions(step, dexter);
+        if (error)
+            return this.fail(error);
 
-        var oauth2Client = new OAuth2();
-        var service = google.drive('v2');
-
-        oauth2Client.setCredentials({access_token: dexter.environment('google_access_token'), refresh_token: dexter.environment('google_refresh_token')});
+        // set credential
+        oauth2Client.setCredentials({
+            access_token: _.get(credentials, 'access_token')
+        });
         google.options({ auth: oauth2Client });
-
         service.files.insert({
             convert: true,
             resource: {
